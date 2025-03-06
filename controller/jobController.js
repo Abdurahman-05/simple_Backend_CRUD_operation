@@ -11,8 +11,7 @@ export const getJob = async (req, res) => {
 };
 export const creatJob = async (req, res) => {
   const { title, description, location, salary } = req.body;
-  if (!title || !description || !location || !salary)
-    return res.sendStatus(400);
+
   try {
     const newJob = new Job({ title, description, location, salary });
     await newJob.save();
@@ -25,8 +24,6 @@ export const creatJob = async (req, res) => {
 export const updeatJob = async (req, res) => {
   if (!req.body.id) return res.sendStatus(400);
   const { title, description, location, salary } = req.body;
-  if (!title || !description || !location || !salary)
-    return res.sendStatus(400);
   try {
     const result = await Job.findOne({ _id: req.body.id });
     if (!result) return res.sendStatus(404);
